@@ -1,0 +1,9 @@
+{
+  "extends": "@tsconfig/node22",
+  "compilerOptions": {
+    "types": ["node", "jest"],
+    "lib": ["ES2023"]
+  },
+  "include": ["infra/**/*.ts", "src/**/*.ts", "test/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}

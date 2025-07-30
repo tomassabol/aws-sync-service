@@ -1,0 +1,18 @@
+{
+  "configVersion": "2",
+  "project": {
+    "name": "gb-sync-service-sub",
+    "stage": "ts",
+    "account": "351520507667",
+    "region": "eu-central-1"
+  },
+  "stacks": {
+    "devops-app-pipeline": {
+      "name": "devops-app-pipeline",
+      "stackType": "SHARED",
+      "repositoryOwner": "gymbeamdev",
+      "repositoryName": "gb-sync-service-sub",
+      "codestarConnectionArn": "arn:aws:codestar-connections:eu-central-1:351520507667:connection/d65f6e65-53c2-4610-8e00-583f84ec93fb"
+    }
+  }
+}

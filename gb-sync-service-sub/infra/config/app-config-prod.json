@@ -1,0 +1,14 @@
+{
+  "configVersion": "2",
+  "project": {
+    "name": "gb-sync-service-sub",
+    "stage": "prod",
+    "account": "780356915252",
+    "region": "eu-central-1"
+  },
+  "stacks": {
+    "app": {
+      "name": "app"
+    }
+  }
+}

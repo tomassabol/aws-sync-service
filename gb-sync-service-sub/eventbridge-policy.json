@@ -1,0 +1,26 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowCrossAccountAccess",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::505843849981:root"
+      },
+      "Action": [
+        "events:DescribeRule",
+        "events:ListRules",
+        "events:ListTargetsByRule",
+        "events:DescribeEventBus",
+        "events:PutRule",
+        "events:DeleteRule",
+        "events:PutTargets",
+        "events:RemoveTargets"
+      ],
+      "Resource": [
+        "arn:aws:events:eu-central-1:780356915252:event-bus/gb-sync-service-pub-prod-event-bus",
+        "arn:aws:events:eu-central-1:780356915252:rule/gb-sync-service-pub-prod-event-bus/*"
+      ]
+    }
+  ]
+}

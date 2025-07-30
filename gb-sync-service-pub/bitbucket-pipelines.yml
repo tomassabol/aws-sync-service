@@ -1,0 +1,72 @@
+image: node:22
+
+definitions:
+  steps:
+    - step: &package-install-step
+        name: Package Install
+        caches:
+          - node
+        script:
+          - npm ci
+    - step: &format-check-step
+        name: Format Check
+        caches:
+          - node
+        script:
+          - npm run format-check
+    - step: &lint-step
+        name: Lint
+        caches:
+          - node
+        script:
+          - npm run lint
+    - step: &type-check-step
+        name: Type Check
+        caches:
+          - node
+        script:
+          - npm run type-check
+    - step: &test-step
+        name: Test
+        caches:
+          - node
+        script:
+          - npm test
+        artifacts:
+          - .coverage/lcov.info
+    - step: &code-analysis-step
+        name: Code Analysis
+        caches:
+          - sonar
+        script:
+          - pipe: sonarsource/sonarqube-scan:2.0.1
+            variables:
+              SONAR_HOST_URL: ${SONAR_HOST_URL}
+              SONAR_TOKEN: ${SONAR_TOKEN}
+
+  caches:
+    sonar: /opt/sonar-scanner/.sonar
+
+clone:
+  depth: full
+
+pipelines:
+  branches:
+    "{main,test,prod}":
+      - step: *package-install-step
+      - parallel:
+          - step: *format-check-step
+          - step: *lint-step
+          - step: *type-check-step
+          - step: *test-step
+      - step: *code-analysis-step
+
+  pull-requests:
+    "**":
+      - step: *package-install-step
+      - parallel:
+          - step: *format-check-step
+          - step: *lint-step
+          - step: *type-check-step
+          - step: *test-step
+      - step: *code-analysis-step
